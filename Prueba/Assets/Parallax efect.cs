@@ -26,7 +26,7 @@ public class Parrallaxefect : MonoBehaviour
         transform.Translate(new Vector3( deltaX, 0, 0));
         previusCamaraPosition=cameraTransform.position;
         
-        if(moveAmount > startPosition + spriteWidth*0.75f)
+        if(moveAmount > startPosition + spriteWidth*0.7f)
         {
             transform.Translate(new Vector3(spriteWidth, 0, 0));
             startPosition += spriteWidth;

@@ -19,12 +19,14 @@ public class Movimiento : MonoBehaviour
     [SerializeField] private Transform controladorSuelo;
     [SerializeField] private bool enSuelo;
     private bool salto = false;
+    private Animator animator;
 
 
 
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
 
     }
 
@@ -36,13 +38,16 @@ public class Movimiento : MonoBehaviour
         {
             salto = true;
         }
+       
     }
 
     private void FixedUpdate()
     {
         enSuelo = Physics2D.OverlapBox(controladorSuelo.position, dimCaja, 0f, EsSuelo);
         Mover(MovHorizontal * Time.fixedDeltaTime, salto);
-
+        
+      
+        
         salto = false;
     }
 
@@ -61,8 +66,15 @@ public class Movimiento : MonoBehaviour
             //Girar
             Girar();
         }
-
-        if(enSuelo && salto)
+        if (mover == 0)
+        {
+            animator.SetBool("IsRunning", false);
+        }
+        else
+        {
+            animator.SetBool("IsRunning", true);
+        }
+        if (enSuelo && salto)
         {
             enSuelo = false;
             rb2d.AddForce(new Vector2(0f, FuerzaSalto));
